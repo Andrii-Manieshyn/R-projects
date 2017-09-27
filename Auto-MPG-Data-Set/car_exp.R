@@ -1,10 +1,12 @@
-auto_mpg <- read.table("C:\\Users\\Andrii\\Documents\\r-project\\Auto-MPG-Data-Set\\data\\auto-mpg-with-header.data", header= TRUE)
-plot(mpg~horsepower,auto_mpg)
+auto_mpg <- read.csv("data\\auto-mpg-with-header.data", sep = ',')
+par(mfrow=c(1,1))
+plot(mpg~acceleration,auto_mpg)
 ## Simple linear regressinon
 names(auto_mpg)
-fit1 = lm(mpg~horsepower, data=auto_mpg)
+fit1 = lm(mpg~acceleration + I(acceleration ^ 2), data=auto_mpg)
 fit1
 summary(fit1)
+lines(auto_mpg$acceleration, predict(fit1), col="green") 
 abline(fit1, col="red")
 names(fit1)
 confint(fit1)
